@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Node
+node-sdk/node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+.DS_Store

@@ -1,0 +1,30 @@
+# Engiyn Python SDK
+
+from flask import Flask
+from jsonschema import validate
+import json
+import importlib
+import os
+
+# Load manifest
+with open(os.path.join(os.getcwd(), "plugin_schema.json"), 'r') as f:
+    SCHEMA = json.load(f)
+
+def load_manifest(path: str) -> dict:
+    manifest = json.load(open(path))
+    validate(instance=manifest, schema=SCHEMA)
+    return manifest
+
+class Plugin:
+    def __init__(self, manifest_path: str):
+        self.manifest = load_manifest(manifest_path)
+        module_name = self.manifest['entrypoint']
+        self.module = importlib.import_module(module_name)
+
+    def register_http(self, app: Flask):
+        if hasattr(self.module, 'register_http'):
+            self.module.register_http(app)
+
+    def register_cli(self, cli_group):
+        if hasattr(self.module, 'register_cli'):
+            self.module.register_cli(cli_group)
