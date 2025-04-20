@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Engiyn Plugin Manifest",
+  "type": "object",
+  "required": ["name", "version", "type", "entrypoint"],
+  "properties": {
+    "name": { "type": "string", "description": "Unique plugin name" },
+    "version": { "type": "string", "description": "Semver version of the plugin" },
+    "type": { "type": "string", "description": "Plugin type (cloud, template, etc.)" },
+    "entrypoint": { "type": "string", "description": "Module or file to load the plugin" },
+    "description": { "type": "string", "description": "Optional plugin description" },
+    "adk_tools": { "type": "array", "items": { "type": "string" }, "description": "Optional list of ADK tools" }
+  },
+  "additionalProperties": false
+}
