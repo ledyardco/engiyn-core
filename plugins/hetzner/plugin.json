@@ -1,0 +1,7 @@
+{
+  "name": "hetzner",
+  "version": "0.1.0",
+  "type": "cloud",
+  "entrypoint": "hetzner",
+  "description": "Hetzner Cloud provider plugin for Engiyn"
+}

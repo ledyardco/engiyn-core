@@ -1,0 +1,7 @@
+{
+  "name": "digitalocean",
+  "version": "0.1.0",
+  "type": "cloud",
+  "entrypoint": "digitalocean",
+  "description": "DigitalOcean provider plugin for Engiyn"
+}

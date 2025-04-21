@@ -1,0 +1,7 @@
+{
+  "name": "vultr",
+  "version": "0.1.0",
+  "type": "cloud",
+  "entrypoint": "vultr",
+  "description": "Vultr provider plugin for Engiyn"
+}
