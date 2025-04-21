@@ -1,6 +1,4 @@
-git add -A
-git commit -m "Resolve merge and move ci.yml to .github/workflows/"git add -A
-git commit -m "Resolve merge and move ci.yml to .github/workflows/"name: CI
+name: CI
 
 on:
   push:
