@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engiyn Multi-Cloud Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <header>
+      <h1>Engiyn Multi-Cloud Dashboard</h1>
+      <div class="actions">
+        <button id="refresh-btn">Refresh Data</button>
+        <button id="create-server-btn">Create Server</button>
+      </div>
+    </header>
+
+    <div class="status-bar">
+      <div class="status-item">
+        <span class="label">Status:</span>
+        <span id="engiyn-status" class="value">Checking...</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Last Update:</span>
+        <span id="last-update" class="value">Never</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Total Servers:</span>
+        <span id="total-servers" class="value">0</span>
+      </div>
+      <div class="status-item">
+        <span class="label">Active Servers:</span>
+        <span id="active-servers" class="value">0</span>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="card providers-card">
+        <h2>Cloud Providers</h2>
+        <div id="providers-list" class="providers-list">
+          <div class="loading">Loading providers...</div>
+        </div>
+      </div>
+
+      <div class="card metrics-card">
+        <h2>Server Metrics</h2>
+        <div class="chart-container">
+          <canvas id="servers-chart"></canvas>
+        </div>
+      </div>
+
+      <div class="card servers-card">
+        <h2>Servers</h2>
+        <div class="filters">
+          <select id="provider-filter">
+            <option value="all">All Providers</option>
+          </select>
+          <select id="status-filter">
+            <option value="all">All Statuses</option>
+            <option value="running">Running</option>
+            <option value="stopped">Stopped</option>
+          </select>
+        </div>
+        <div id="servers-table-container" class="servers-table-container">
+          <table id="servers-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Provider</th>
+                <th>Status</th>
+                <th>IP</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="servers-tbody">
+              <tr>
+                <td colspan="7" class="loading">Loading servers...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for creating servers -->
+  <div id="create-server-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Create New Server</h2>
+      <form id="create-server-form">
+        <div class="form-group">
+          <label for="server-provider">Provider:</label>
+          <select id="server-provider" required>
+            <!-- Will be populated dynamically -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="server-name">Name:</label>
+          <input type="text" id="server-name" placeholder="my-server" required>
+        </div>
+        <div class="form-group">
+          <label for="server-type">Type/Size:</label>
+          <select id="server-type" required>
+            <option value="small">Small (1 CPU, 1GB RAM)</option>
+            <option value="medium">Medium (2 CPU, 2GB RAM)</option>
+            <option value="large">Large (4 CPU, 4GB RAM)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="server-location">Location:</label>
+          <select id="server-location" required>
+            <option value="us">United States</option>
+            <option value="eu">Europe</option>
+            <option value="asia">Asia</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="submit">Create Server</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
