@@ -62,8 +62,7 @@ jobs:
         with:
           node-version: '16'
           
-      - name: Publish npm package
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          package: ./node-sdk/package.json
+      - name: Skip npm publish for now
+        run: |
+          echo "Skipping npm publish until NPM_TOKEN is properly configured"
+          echo "To publish to npm, add NPM_TOKEN secret in GitHub repository settings"
